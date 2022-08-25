@@ -5,3 +5,11 @@
 * lets start with UML diagram 
 
 ![link](./src/image/UML.png)
+
+* in the first phase of the lap I got some result but it is not soo good 
+
+![link](./src/image/Screenshot%20(503).png)
+
+![link](./src/image/Screenshot%20(504).png)
+
+![link](./src/image/Screenshot%20(505).png)
