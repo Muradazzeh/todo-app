@@ -6,7 +6,14 @@ const useForm = (callback, defaultValues={}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // alert('You have submitted the form.')
+    console.log(event.target.value,"12121212121")
+   if(event.target.text.value==""){
+    return alert('You have submitted empty form please fill the input.')
+   }
     callback(values);
+    event.target.reset();
+    event.target.text.focus();
   };
 
   const handleChange = (event) => {

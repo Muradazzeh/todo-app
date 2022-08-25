@@ -7,7 +7,7 @@ export default class Header extends React.Component {
         return (
             <header>
 <Navbar>
-    <Navbar.Group align={Alignment.RIGHT}>
+    <Navbar.Group align={Alignment.LEFT}>
         <Navbar.Heading>   </Navbar.Heading>
         <Navbar.Divider />
         <Button className="bp4-minimal" icon="home" text="Home" />
