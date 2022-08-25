@@ -1,0 +1,26 @@
+.list {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .list {
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    float: right;
+  }
+  
+  .list {
+    box-sizing: content-box;
+    margin: 10px;
+  }
+  
+  .list:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.589);
+  }
+.card{
+    box-sizing: content-box;
+    display: inline;
+    float: left;
+}

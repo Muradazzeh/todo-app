@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useContext } from 'react';
 import useForm from '../../hooks/form.js';
-import { ControlGroup,Label, Button } from '@blueprintjs/core';
+import List from "../list/list"
+import { ControlGroup,Label, Button,InputGroup } from '@blueprintjs/core';
 import { v4 as uuid } from 'uuid';
-
+import { SettingsContext } from "../../context/context"
 const ToDo = () => {
+
+const setting = useContext(SettingsContext)
+console.log(setting,"111111111")
 
   const [defaultValues] = useState({
     difficulty: 4,
@@ -11,6 +15,9 @@ const ToDo = () => {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+
+  const [startPage, setStartPage] = useState(0);
+  const [endPage, setEndPage] = useState(setting.itemPage)
 
   function addItem(item) {
     item.id = uuid();
@@ -43,6 +50,22 @@ const ToDo = () => {
     document.title = `To Do List: ${incomplete}`;
   }, [list]);
 
+
+
+  function pagination() {
+    let result = list.slice(startPage, endPage);
+    return result;
+  }
+
+  function next() {
+    setStartPage(startPage + setting.itemPage);
+    setEndPage(endPage + setting.itemPage);
+  }
+  function previous() {
+    setEndPage(endPage - setting.itemPage);
+    setStartPage(startPage - setting.itemPage);
+  }
+
   return (
     <>
       <header className="H1">
@@ -51,16 +74,16 @@ const ToDo = () => {
 
       <form onSubmit={handleSubmit}>
 
-        <h2>Add To Do Item</h2>
-        <dev id="col-rev" className="cont">
+         <h2>Add To Do Item</h2>
+        <div id="col-rev" className="cont">
         <Label>
           <span>To Do Item</span>
-          <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
+          <InputGroup onChange={handleChange} name="text" type="text" placeholder="Item Details" />
         </Label>
 
         <Label>
           <span>Assigned To</span>
-          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
+          <InputGroup onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
         </Label>
 
         <Label>
@@ -71,10 +94,11 @@ const ToDo = () => {
         <Label>
           <Button type="submit">Add Item</Button>
         </Label>
-        </dev>
+
+        </div> 
       </form>
 
-      {list.map(item => (
+      {/* {list.map(item => (
         <div key={item.id}>
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
@@ -82,10 +106,16 @@ const ToDo = () => {
           <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
           <hr />
         </div>
-      ))}
-
+      ))}  */}
+ <List
+        pagination={pagination}
+        next={next}
+        previous={previous}
+        toggleComplete={toggleComplete}
+        deleteItem={deleteItem}
+      />
     </>
-  );
+  )
 };
 
 export default ToDo;
