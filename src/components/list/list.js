@@ -9,7 +9,7 @@ function List(props) {
             
             {
                 props.pagination().map((item, idx) => (
-                    <div className='card' key={idx}>
+                    <div  style={{display:"inline-block",padding:"10px",border:"1px solid black"}} className='card' key={idx}>
                         <p>{item.text}</p>
                         <p><small>Assigned to: {item.assignee}</small></p>
                         <p><small>Difficulty: {item.difficulty}</small></p>

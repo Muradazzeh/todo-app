@@ -65,7 +65,17 @@ console.log(setting,"111111111")
     setEndPage(endPage - setting.itemPage);
     setStartPage(startPage - setting.itemPage);
   }
+  useEffect(() => {
 
+   
+    let payload = {
+       itemPage: setting.itemPage,
+        show: setting.show,
+    }
+    console.log(payload,"777777777777777777777777777777777")
+        localStorage.setItem('settings', JSON.stringify(payload));
+    
+}, [setting])
   return (
     <>
       <header className="H1">
@@ -93,11 +103,12 @@ console.log(setting,"111111111")
 
         <Label>
           <Button type="submit">Add Item</Button>
+          
         </Label>
 
         </div> 
       </form>
-
+     
       {/* {list.map(item => (
         <div key={item.id}>
           <p>{item.text}</p>
