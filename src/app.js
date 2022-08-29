@@ -6,6 +6,8 @@ import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 import './app.scss'
 import Header from './components/header.js';
 import ToDo from './components/todo/todo.js';
+import Auth from './components/auth.js';
+import LoginTest from './components/logintest'
 import Settings from './context/context';
 import About from './pages/about'
 import Files from './pages/Files'
@@ -14,10 +16,12 @@ import Error from './pages/Error'
 export default class App extends React.Component {
   render() {
     return (
+      
       <Router>
+        {/* <Auth> */}
       <Settings>
         <Routes>
-          <Route path="/" element={ [<Header/>,<ToDo />]}/>
+          <Route path="/" element={ [<Header/>,<LoginTest/>,<ToDo />]}/>
       {/* <Header/>
       <ToDo /> */}
       <Route path="/about" element={<About/>}/>
@@ -25,7 +29,9 @@ export default class App extends React.Component {
       <Route path="*" element={<Error/>}/>
       </Routes>
       </Settings>
+      {/* </Auth> */}
       </Router>
+      
     );
   }
 }
