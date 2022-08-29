@@ -67,14 +67,11 @@ console.log(setting,"111111111")
   }
   useEffect(() => {
 
+   console.log(list,"list")
    
-    let payload = {
-       itemPage: setting.itemPage,
-        show: setting.show,
-    }
-    console.log(payload,"777777777777777777777777777777777")
-        localStorage.setItem('settings', JSON.stringify(payload));
-    
+    // console.log(payload,"777777777777777777777777777777777")
+        localStorage.setItem('settings', JSON.stringify(list));
+    setList(list);
 }, [setting])
   return (
     <>

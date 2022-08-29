@@ -23,6 +23,7 @@ export default function Settings(props) {
             setItemPage(Number(result.itemPage));
             
         }
+        
        
     },[])
 return (
