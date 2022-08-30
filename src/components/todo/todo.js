@@ -4,9 +4,13 @@ import List from "../list/list"
 import { ControlGroup,Label, Button,InputGroup } from '@blueprintjs/core';
 import { v4 as uuid } from 'uuid';
 import { SettingsContext } from "../../context/context"
+import { When } from 'react-if';
+import { LoginContext } from "../../context/loginContext"
+import Auth from "../auth"
 const ToDo = () => {
 
 const setting = useContext(SettingsContext)
+const login = useContext(LoginContext);
 console.log(setting,"111111111")
 
   const [defaultValues] = useState({
@@ -75,10 +79,13 @@ console.log(setting,"111111111")
 }, [setting])
   return (
     <>
+     <When condition={login.login}>
+        <Auth action="read">
       <header className="H1">
         <h1>To Do List: {incomplete} items pending</h1>
       </header>
-
+      </Auth>
+      <Auth action="read">
       <form onSubmit={handleSubmit}>
 
          <h2>Add To Do Item</h2>
@@ -115,13 +122,19 @@ console.log(setting,"111111111")
           <hr />
         </div>
       ))}  */}
+       </Auth>
+        <Auth action="read">
  <List
         pagination={pagination}
         next={next}
         previous={previous}
         toggleComplete={toggleComplete}
+       
         deleteItem={deleteItem}
+       
       />
+        </Auth>
+      </When>
     </>
   )
 };

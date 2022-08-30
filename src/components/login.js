@@ -1,119 +1,66 @@
-import React from 'react';
-import { When } from 'react-if';
-import { LoginContext } from '../context/loginContext';
 
-export default class Login extends React.Component {
-    static contextType = LoginContext;
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: "",
-            password: ""
-        }
-    }
-    changeHandler = (e) => {
-        
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-    submitHandler = (e) => {
+    import React, { useContext, useState } from "react";
+    import "./todo/login.scss"
+    import { Navbar, Alignment, Button } from '@blueprintjs/core';
+    import { LoginContext } from "../context/loginContext";
+    import { When } from "react-if";
+    
+    export default function LoginForm(props) {
+      const loginContext = useContext(LoginContext);
+      const [username, setUsername] = useState("");
+      const [password, setPassword] = useState();
+      /////////submit/////////////////
+      const handleSubmit = (e) => {
         e.preventDefault();
-        this.context.loginFunction(this.state.username, this.state.password);
+        if(username && password) {
+        loginContext.loginFunction(username, password)
     }
-    render() {
-        return (
-            <>
-            <When condition={!this.context.login}>
-            <form onSubmit={this.submitHandler} >
-               
-            <input
-              placeholder="UserName"
-              name="username"
-              onChange={this.changeHandler}
-            />
-            <input
-              placeholder="password"
-              name="password"
-              onChange={this.changeHandler}
-            />
-            <button>Login</button>
-          </form>
+    else {
+        alert("Please enter your username and password");
+    }
+
+      };
+      const usernameHandler = (e) => {
+        e.preventDefault();
+        setUsername(e.target.value);
+      };
+      const passwordHandler = (e) => {
+        e.preventDefault();
+        setPassword(e.target.value);
+      };
+      return (
+        <>
+          <When condition={!loginContext.login}>
+          <div className='container'>
+        <div className='app-wrapper'>
+            <div>
+                <h2 className='tittle'> Login form </h2>
+            </div>
+            <form className='form-wrapper'>
+                <div className='name'>
+                    <label className='label'>Full name</label>
+                    <input className='input' type='text' onChange={usernameHandler}  />
+                </div>
+    
+                <div className='password'>
+                    <label className='label'>Password</label>
+                    <input className='input' type='password' onChange={passwordHandler}  />
+                </div>
+                <div >
+                    <button className='submit' onClick={handleSubmit}>Login</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
           </When>
-             <When condition={this.context.login}>
-             <div>
-                 {this.context.user.username}
-             </div>
-             <button onClick={this.context.logoutFunction}>Logout</button>
-         </When>
-         </>
-            )
-        }
+          <When condition={loginContext.login}>
+            <div>
+                        <h2>{`User name :${loginContext.user.username}`}</h2>
+                    <Button onClick={loginContext.logoutFunction}>Logout</Button>
+                    </div>
+                </When>
+        
+        </>
+      );
     }
-
-
-
-//     import React, { useContext, useState } from "react";
-
-//     import { LoginContext } from '../context/loginContext';
-// import { When } from "react-if";
-
-// export default function Login(props) {
-//   const loginContext = useContext(LoginContext);
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState();
-//   /////////submit/////////////////
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log(loginContext);
-//     // console.log("name  ",e.uname.value)
-//     loginContext.login(username, password);
-//   };
-//   const usernameHandler = (e) => {
-//     e.preventDefault();
-//     setUsername(e.target.value);
-//   };
-//   const passwordHandler = (e) => {
-//     e.preventDefault();
-//     setPassword(e.target.value);
-//   };  
-//   return (
-//     <>
-//       <When condition={!loginContext.login}>
-//         <div className="f">
-//           <form>
-//             <div className="input-container">
-//               <label>Username </label>
-//               <input
-//                 type="text"
-//                 name="uname"
-//                 required
-//                 onChange={usernameHandler}
-//               />
-//               {/* {renderErrorMessage("uname")} */}
-//             </div>
-//             <div className="input-container">
-//               <label>Password </label>
-//               <input
-//                 type="password"
-//                 name="pass"
-//                 required
-//                 onChange={passwordHandler}
-//               />
-//               {/* {renderErrorMessage("pass")} */}
-//             </div>
-//             <div className="button-container">
-//               <input type="submit" onClick={handleSubmit} />
-//             </div>
-//           </form>
-//         </div>
-//       </When>
-//       {/* <When condition={loginContext.loggedIn}>
-//                     <div>
-//                         {loginContext.user.username}
-//                     </div>
-//                     <button onClick={loginContext.logout}>Logout</button>
-//                 </When> */}
-//     </>
-//   );
-// }

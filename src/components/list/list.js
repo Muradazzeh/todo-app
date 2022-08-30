@@ -1,7 +1,7 @@
 import React from 'react';
 import "./list.scss"
 import { Button, Card, Elevation } from '@blueprintjs/core';
-
+import Auth from '../auth';
 function List(props) {
     return (
         <div className="list">
@@ -17,13 +17,17 @@ function List(props) {
                         {
                             (!item.complete)
                                 ? (
+                                    <Auth action="update">
                                     <Button onClick={() => props.toggleComplete(item.id)}>Complete: {item.complete.toString()}</Button>
+                                    </Auth>
                                 )
                                 : (
                                     <>
                                         {/* <Button onClick={() => props.toggleComplete(item.id)}>Complete: {item.complete.toString()}</Button> */}
                                         <br></br>
+                                        <Auth action="delete">
                                         <Button onClick={() => props.deleteItem(item.id)}>Delete </Button>
+                                        </Auth>
                                     </>
                                 )
                         }

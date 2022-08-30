@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import superagent from "superagent";
 import base64 from "base-64";
 import cookie from "react-cookies";
-import { useJwt } from "react-jwt";
+import JWT from "jwt-decode";
 
 const API = `https://hiservice.herokuapp.com`
 export const LoginContext= React.createContext()
@@ -43,7 +43,7 @@ const logoutFunction = () => {
 
 const validateMyUser= (user)=>{
   if (user.token){
-    const userFromToken = useJwt(user.token);
+    const userFromToken = JWT(user.token);
     console.log('username >>>> ', userFromToken);
     setLogin(true);
     setUser(user);
