@@ -15,6 +15,7 @@ export default function Header ()  {
         <Button onClick={()=>{navigate("/")}} className="bp4-minimal" icon="home" text="Home" />
         <Button onClick={()=>{navigate("/file")}} className="bp4-minimal" icon="document" text="Files" />
         <Button onClick={()=>{navigate("/about")}}  className="bp4-minimal" icon="chat" text="Contact" />
+        <Button onClick={()=>{navigate("/signUp")}}  className="bp4-minimal" icon="login" text="signUp" />
         
       
     </Navbar.Group>

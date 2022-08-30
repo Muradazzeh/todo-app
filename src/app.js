@@ -9,6 +9,7 @@ import ToDo from './components/todo/todo.js';
 import Settings from './context/context';
 import About from './pages/about'
 import Files from './pages/Files'
+import SignupForm from './components/signup'
 import Error from './pages/Error'
 import LoginForm from './components/login';
 import LoginProvider, { LoginContext } from "./context/loginContext";
@@ -25,6 +26,7 @@ export default class App extends React.Component {
       <Route path="/" element={ [<Header/>,<LoginForm></LoginForm>,<ToDo />]}/>
       <Route path="/about" element={<About/>}/>
       <Route path="/file" element={<Files/>}/>
+      <Route path="/signUp" element={<SignupForm/>}/>
       <Route path="*" element={<Error/>}/>
       </Routes>
       </Settings>
