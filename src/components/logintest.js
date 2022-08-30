@@ -4,17 +4,17 @@ function LoginTest() {
   return (
     <>
     
-    <form onSubmit >
+    <form  >
        
-    <InputGroup
+    <input
       placeholder="UserName"
       name="username"
       
     />
-    <InputGroup
+    <input
       placeholder="password"
       name="password"
-      
+     
     />
     <Button>Login</Button>
 
