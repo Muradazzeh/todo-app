@@ -3,6 +3,7 @@ import superagent from "superagent";
 import base64 from "base-64";
 import cookie from "react-cookies";
 import JWT from "jwt-decode";
+import axios from "axios"
 
 const API = `https://hiservice.herokuapp.com`
 export const LoginContext= React.createContext()
@@ -32,6 +33,15 @@ const loginFunction = async (username, password) => {
   } catch (err) {
 
   }
+}
+const signUp = (username,password,role) => {
+  axios.post(`${API}/users/signup`,{
+      username : username,
+      password : password,
+      role : role,
+  }).then(res => {
+      console.log(res.data);
+  })
 }
 const logoutFunction = () => {
   setLogin(false);
@@ -65,6 +75,7 @@ const can = (action) => {
 const state = {
   login: login,
   loginFunction: loginFunction,
+  signUp:signUp,
   logoutFunction: logoutFunction,
   user: user,
   canDo: can
